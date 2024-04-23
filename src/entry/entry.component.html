@@ -1,1 +1,33 @@
-<p>entry works!</p>
+<form [formGroup]="CourseGroup" (ngSubmit)="save()">
+<table>
+  <tr>
+    <th> Course Entry Form</th>
+  </tr>
+  <tr>
+    <th> Id :</th>
+    <td>  <p-inputNumber inputId="integeronly" formControlName="id"></p-inputNumber> </td>
+  </tr>
+  <tr>
+    <th>Name :</th>
+    <td><input type="text" pInputText formControlName="name"/></td>
+  </tr>
+  <tr>
+    <th> Duration : </th>
+    <th>
+      <input type="text" pInputText formControlName="duration"/>
+    </th>
+  </tr>
+   <tr>
+      <th> Fees :</th>
+      <td> <p-inputNumber  mode="currency" inputId="currency-india" currency="INR" currencyDisplay="code" locale="en-IN" formControlName="fees" > </p-inputNumber>  </td>
+   </tr>
+  <tr>
+    <p-button type="submit" label="Save"  [rounded]="true"></p-button>
+    <p-button label="Clear" type="reset" [rounded]="true" severity="danger"></p-button>
+
+
+  </tr>
+</table>
+</form>
+<h1>{{msg}}</h1>
+<p-toast  key="toast1"></p-toast>
