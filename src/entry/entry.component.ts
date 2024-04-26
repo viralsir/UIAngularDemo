@@ -7,7 +7,11 @@ import {InputNumberModule} from "primeng/inputnumber";
 import {ButtonModule} from "primeng/button";
 import {ToastModule} from "primeng/toast";
 import {MessageService} from "primeng/api";
+import {MessagesModule} from "primeng/messages";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {BrowserModule} from "@angular/platform-browser";
+
+
 
 @Component({
   selector: 'app-entry',
@@ -18,13 +22,15 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     InputNumberModule,
     ButtonModule,
     ToastModule,
-
+    MessagesModule,
   ],
   templateUrl: './entry.component.html',
-  styleUrl: './entry.component.css'
+  styleUrl: './entry.component.css',
+
 })
 export class EntryComponent {
 
+  messages1:any;
     msg:string="";
     CourseGroup=new FormGroup({
        id:new FormControl(""),
@@ -47,6 +53,10 @@ export class EntryComponent {
         this.CourseGroup.reset();
         this.messageService.clear();
         this.messageService.add({ key: 'toast1', severity: 'success', summary: 'Success', detail: this.msg });
+     this.messages1 = [
+       { severity: 'success', summary: 'Success', detail: 'Record has been saved.' }
+
+     ];
 
    }
 

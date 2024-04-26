@@ -1,4 +1,4 @@
-<form [formGroup]="CourseGroup" (ngSubmit)="save()">
+<form [formGroup]="CourseGroup">
 <table>
   <tr>
     <th> Course Entry Form</th>
@@ -22,7 +22,7 @@
       <td> <p-inputNumber  mode="currency" inputId="currency-india" currency="INR" currencyDisplay="code" locale="en-IN" formControlName="fees" > </p-inputNumber>  </td>
    </tr>
   <tr>
-    <p-button type="submit" label="Save"  [rounded]="true"></p-button>
+    <p-button type="submit" label="Save"  (click)="save()"  [rounded]="true"></p-button>
     <p-button label="Clear" type="reset" [rounded]="true" severity="danger"></p-button>
 
 
@@ -30,4 +30,4 @@
 </table>
 </form>
 <h1>{{msg}}</h1>
-<p-toast  key="toast1"></p-toast>
+<p-messages [(value)]="messages1" [enableService]="false" [closable]="false"></p-messages>
