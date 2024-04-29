@@ -17,12 +17,13 @@ import {MessagesModule} from "primeng/messages";
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    /* ReactiveFormsModule,
+    MessagesModule,
+     ReactiveFormsModule,
      InputTextModule,
      InputNumberModule,
      ButtonModule,
      ToastModule,
-     MessagesModule,*/
+     MessagesModule,
   ],
   templateUrl: './entry.component.html',
   styleUrl: './entry.component.css',
