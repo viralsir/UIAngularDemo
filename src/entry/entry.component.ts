@@ -8,8 +8,7 @@ import {ButtonModule} from "primeng/button";
 import {ToastModule} from "primeng/toast";
 import {MessageService} from "primeng/api";
 import {MessagesModule} from "primeng/messages";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {BrowserModule} from "@angular/platform-browser";
+
 
 
 
@@ -18,11 +17,12 @@ import {BrowserModule} from "@angular/platform-browser";
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    InputTextModule,
-    InputNumberModule,
-    ButtonModule,
-    ToastModule,
-    MessagesModule,
+    /* ReactiveFormsModule,
+     InputTextModule,
+     InputNumberModule,
+     ButtonModule,
+     ToastModule,
+     MessagesModule,*/
   ],
   templateUrl: './entry.component.html',
   styleUrl: './entry.component.css',
