@@ -1,21 +1,58 @@
 
 <div class="card">
-  <p-table [value]="courseservice.getCourses()" [tableStyle]="{ 'min-width': '50rem' }">
+  <p-table #dt1 [value]="courseservice.getCourses()" [tableStyle]="{ 'min-width': '50rem' }"
+           [globalFilterFields]="['id', 'name', 'duration', 'fees']"
+           [rows]="3"
+           [showCurrentPageReport]="true"
+           [rowsPerPageOptions]="[10, 25, 50]"
+           [paginator]="true"
+           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  >
+<!--    <ng-template pTemplate="caption">-->
+<!--      <div class="flex">-->
+<!--        <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>-->
+<!--        <span class="p-input-icon-left ml-auto">-->
+<!--                <i class="pi pi-search"></i>-->
+<!--                <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value,-->
+<!-- 'contains') //noinspection UnresolvedReference" placeholder="Search keyword" />-->
+<!--            </span>-->
+<!--      </div>-->
+<!--    </ng-template>-->
     <ng-template pTemplate="header">
       <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Duration</th>
-        <th>Fees</th>
+        <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+        <th pSortableColumn="duration">Duration <p-sortIcon field="duration"></p-sortIcon></th>
+        <th pSortableColumn="fees">Fees <p-sortIcon field="fees"></p-sortIcon></th>
       </tr>
+      <tr>
+        <th>
+          <p-columnFilter type="numeric" field="id"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="name"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="duration"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="numeric" field="fees"></p-columnFilter>
+        </th>
+      </tr>
+
     </ng-template>
     <ng-template pTemplate="body" let-course>
       <tr>
         <td>{{ course.id }}</td>
         <td>{{ course.name }}</td>
         <td>{{ course.duration }}</td>
-        <td>{{ course.fees }}</td>
+        <td>{{ course.fees  | currency: 'INR':'symbol'  }}</td>
       </tr>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="4">No customers found.</td>
+        </tr>
+      </ng-template>
     </ng-template>
   </p-table>
 </div>
