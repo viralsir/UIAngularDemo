@@ -5,7 +5,11 @@ import {Course} from "../model/course";
   providedIn: 'root'
 })
 export class CourseService {
+
   messages1:any;
+  formdislaymode:string="New";
+  CurrentRecord:any;
+
   public courses: Course[]=new Array<Course>();
   constructor() { }
 
@@ -16,6 +20,7 @@ export class CourseService {
   getCourses() {
     return this.courses;
   }
+
 
 
 }

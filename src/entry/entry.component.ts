@@ -34,30 +34,54 @@ export class EntryComponent {
   messages1:any;
     msg:string="";
     CourseGroup=new FormGroup({
-       id:new FormControl(""),
-       name:new FormControl("",[Validators.maxLength(50)]),
-      duration:new FormControl(""),
-      fees:new FormControl("",[Validators.min(0) ])
+       _id:new FormControl(""),
+       _name:new FormControl("",[Validators.maxLength(50)]),
+      _duration:new FormControl(""),
+      _fees:new FormControl("",[Validators.min(0) ])
     })
 
    constructor(public courseservice:CourseService,private messageService: MessageService) {
+         console.log("consutructor is called.");
+         if(this.courseservice.formdislaymode=="Edit")
+         {
+             //const form=this.CourseGroup.value;
+             /*this.CourseGroup.get('id')?.setValue(this.courseservice.CurrentRecord.id);
+             this.CourseGroup.get('name')?.setValue(this.courseservice.CurrentRecord.name);
+             this.CourseGroup.get('duration')?.setValue(this.courseservice.CurrentRecord.duration);
+             this.CourseGroup.get('fees')?.setValue(this.courseservice.CurrentRecord.fees);
+             */
+             this.CourseGroup.setValue(this.courseservice.CurrentRecord);
+
+
+
+         }
 
    }
 
    save(){
 
-        let courseform=this.CourseGroup.value;
-        console.log(courseform);
-        let course=new Course(parseInt(<string>courseform.id),<string>courseform.name,<string>courseform.duration,parseInt(<string>courseform.fees));
-        this.courseservice.setCourses(course);
-        this.msg="Record has been saved.";
-        this.CourseGroup.reset();
-        this.messageService.clear();
-        this.messageService.add({ key: 'toast1', severity: 'success', summary: 'Success', detail: this.msg });
-     this.messages1 = [
+        if(this.courseservice.formdislaymode=="New")
+        {
+          let courseform=this.CourseGroup.value;
+          console.log(courseform);
+          let course=new Course(parseInt(<string>courseform._id),<string>courseform._name,<string>courseform._duration,parseInt(<string>courseform._fees));
+          this.courseservice.setCourses(course);
+          this.msg="Record has been saved.";
+          this.CourseGroup.reset();
+          this.messageService.clear();
+          this.messageService.add({ key: 'toast1', severity: 'success', summary: 'Success', detail: this.msg });
+
+        }
+        else
+        {
+          this.courseservice.formdislaymode="New";
+
+        }
+
+     /*this.messages1 = [
        { severity: 'success', summary: 'Success', detail: 'Record has been saved.' }
 
-     ];
+     ];*/
 
    }
 
