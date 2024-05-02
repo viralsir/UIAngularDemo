@@ -8,6 +8,7 @@ import {ButtonModule} from "primeng/button";
 import {ToastModule} from "primeng/toast";
 import {MessageService} from "primeng/api";
 import {MessagesModule} from "primeng/messages";
+import {Router} from "@angular/router";
 
 
 
@@ -32,7 +33,9 @@ import {MessagesModule} from "primeng/messages";
 export class EntryComponent {
 
   messages1:any;
-    msg:string="";
+
+    msg:string="New";
+
     CourseGroup=new FormGroup({
        _id:new FormControl(""),
        _name:new FormControl("",[Validators.maxLength(50)]),
@@ -40,7 +43,7 @@ export class EntryComponent {
       _fees:new FormControl("",[Validators.min(0) ])
     })
 
-   constructor(public courseservice:CourseService,private messageService: MessageService) {
+   constructor(public courseservice:CourseService,private messageService: MessageService,public router:Router) {
          console.log("consutructor is called.");
          if(this.courseservice.formdislaymode=="Edit")
          {
@@ -51,7 +54,7 @@ export class EntryComponent {
              this.CourseGroup.get('fees')?.setValue(this.courseservice.CurrentRecord.fees);
              */
              this.CourseGroup.setValue(this.courseservice.CurrentRecord);
-
+            this.msg="Update";
 
 
          }
@@ -60,22 +63,31 @@ export class EntryComponent {
 
    save(){
 
+        let courseform=this.CourseGroup.value;
+        console.log(courseform);
+
+       let course=new Course(parseInt(<string>courseform._id),<string>courseform._name,<string>courseform._duration,parseInt(<string>courseform._fees));
         if(this.courseservice.formdislaymode=="New")
         {
-          let courseform=this.CourseGroup.value;
-          console.log(courseform);
-          let course=new Course(parseInt(<string>courseform._id),<string>courseform._name,<string>courseform._duration,parseInt(<string>courseform._fees));
+
           this.courseservice.setCourses(course);
-          this.msg="Record has been saved.";
+          //this.msg="Record has been saved.";
           this.CourseGroup.reset();
           this.messageService.clear();
-          this.messageService.add({ key: 'toast1', severity: 'success', summary: 'Success', detail: this.msg });
+          this.messageService.add({ key: 'toast1', severity: 'success', summary: 'Success', detail: "Record is successfully added." });
 
         }
         else
         {
+          // @ts-ignore
+          let index=this.courseservice.getCourses().findIndex(data => data.id==parseInt(this.CourseGroup.value._id))
+          this.courseservice.getCourses()[index]=course;
           this.courseservice.formdislaymode="New";
-
+          this.msg="New";
+          this.CourseGroup.reset();
+          this.messageService.clear();
+          this.messageService.add({ key: 'toast1', severity: 'success', summary: 'Success', detail: "Record is Successfuly updated." });
+          this.router.navigate(["View"])
         }
 
      /*this.messages1 = [
