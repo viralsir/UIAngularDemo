@@ -12,6 +12,7 @@ import {MessageService} from "primeng/api";
 import {ReactiveFormsModule} from "@angular/forms";
 import {InputTextModule} from "primeng/inputtext";
 import {InputNumberModule} from "primeng/inputnumber";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import {InputNumberModule} from "primeng/inputnumber";
     ButtonModule,
     ToastModule,
     MessagesModule,
+    HttpClientModule
   ],
   providers: [
      MessageService,

@@ -67,28 +67,38 @@ export class EntryComponent {
         console.log(courseform);
 
        let course=new Course(parseInt(<string>courseform._id),<string>courseform._name,<string>courseform._duration,parseInt(<string>courseform._fees));
-        if(this.courseservice.formdislaymode=="New")
-        {
+       this.courseservice.setDBCourse(course).subscribe(data=>{
+           console.log(data);
+            /*if(data==='0')
+            {
+              this.CourseGroup.reset();
+              //   this.messageService.clear();
+              //   this.messageService.add({ key: 'toast1', severity: 'success', summary: 'Success', detail: "Record is successfully added." });
+            }*/
 
-          this.courseservice.setCourses(course);
-          //this.msg="Record has been saved.";
-          this.CourseGroup.reset();
-          this.messageService.clear();
-          this.messageService.add({ key: 'toast1', severity: 'success', summary: 'Success', detail: "Record is successfully added." });
-
-        }
-        else
-        {
-          // @ts-ignore
-          let index=this.courseservice.getCourses().findIndex(data => data.id==parseInt(this.CourseGroup.value._id))
-          this.courseservice.getCourses()[index]=course;
-          this.courseservice.formdislaymode="New";
-          this.msg="New";
-          this.CourseGroup.reset();
-          this.messageService.clear();
-          this.messageService.add({ key: 'toast1', severity: 'success', summary: 'Success', detail: "Record is Successfuly updated." });
-          this.router.navigate(["View"])
-        }
+       })
+       // if(this.courseservice.formdislaymode=="New")
+        // {
+        //
+        //   this.courseservice.setCourses(course);
+        //   //this.msg="Record has been saved.";
+        //   this.CourseGroup.reset();
+        //   this.messageService.clear();
+        //   this.messageService.add({ key: 'toast1', severity: 'success', summary: 'Success', detail: "Record is successfully added." });
+        //
+        // }
+        // else
+        // {
+        //   // @ts-ignore
+        //   let index=this.courseservice.getCourses().findIndex(data => data.id==parseInt(this.CourseGroup.value._id))
+        //   this.courseservice.getCourses()[index]=course;
+        //   this.courseservice.formdislaymode="New";
+        //   this.msg="New";
+        //   this.CourseGroup.reset();
+        //   this.messageService.clear();
+        //   this.messageService.add({ key: 'toast1', severity: 'success', summary: 'Success', detail: "Record is Successfuly updated." });
+        //   this.router.navigate(["View"])
+        // }
 
      /*this.messages1 = [
        { severity: 'success', summary: 'Success', detail: 'Record has been saved.' }
